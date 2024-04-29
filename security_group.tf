@@ -69,7 +69,7 @@ resource "aws_security_group_rule" "app_out_http" {
   protocol          = "tcp"
   from_port         = 80
   to_port           = 80
-  prefix_list_ids   = [data.aws_prefix_list.s3_pl]
+  prefix_list_ids   = [data.aws_prefix_list.s3_pl.id]
 }
 
 resource "aws_security_group_rule" "app_out_https" {
@@ -78,7 +78,7 @@ resource "aws_security_group_rule" "app_out_https" {
   protocol          = "tcp"
   from_port         = 443
   to_port           = 443
-  prefix_list_ids   = [data.aws_prefix_list.s3_pl]
+  prefix_list_ids   = [data.aws_prefix_list.s3_pl.id]
 }
 
 resource "aws_security_group_rule" "app_out_tcp3306" {
@@ -87,7 +87,7 @@ resource "aws_security_group_rule" "app_out_tcp3306" {
   protocol                 = "tcp"
   from_port                = 3306
   to_port                  = 3306
-  source_security_group_id = aws_security_group.db_sg
+  source_security_group_id = aws_security_group.db_sg.id
 }
 
 # opmng security group
