@@ -15,3 +15,13 @@ resource "aws_db_parameter_group" "mysql_standalone_parameter_group" {
     value = "utf8mb4"
   }
 }
+
+# ---------------------------------------------
+# RDS option group
+# ---------------------------------------------
+resource "aws_db_option_group" "mysql_standalone_option_group" {
+  name                 = "${var.project}-${var.environment}-mysql-standalone-option-group"
+  engine_name          = "mysql"
+  major_engine_version = "8.0"
+
+}
