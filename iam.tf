@@ -2,7 +2,7 @@
 # IAM Role
 # ---------------------------------------------
 
-resource "aws_iam_instance_profile" "app_ec2_profile" "" {
+resource "aws_iam_instance_profile" "app_ec2_profile" {
   name = aws_iam_role.app_iam_role_name
   role = aws_iam_role.app_iam_role_name
 
