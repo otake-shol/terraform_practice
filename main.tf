@@ -35,3 +35,13 @@ variable "project" {
 variable "environment" {
   type = string
 }
+
+# ---------------------------------------------
+# IAM ユーザの複数作成
+# ---------------------------------------------
+
+// メタ引数利用の練習が目的。本質的に不要な設定
+resource "aws_iam_user" "user" {
+  count = 2
+  name  = "testuser-${count.index}"
+}
