@@ -15,6 +15,7 @@ resource "aws_route53_zone" "route53_zone" {
   }
 }
 
+// TODO 動作させるためにはドメインサービスへの登録が必要
 resource "aws_route53_record" "route53_record" {
   zone_id = aws_route53_zone.route53_zone.id
   name    = "dev-elb.${var.domain}"
