@@ -1,8 +1,8 @@
 # ---------------------------------------------
 # Certificate
 # ---------------------------------------------
-
-resource "aws_acm_certificate" "acm_certificate" {
+# for tokyo region
+resource "aws_acm_certificate" "tokyo_cert" {
   domain_name       = "*.${var.domain}"
   validation_method = "DNS"
 
