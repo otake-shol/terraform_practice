@@ -70,3 +70,42 @@ resource "aws_instance" "app_server" {
     Type    = "app"
   }
 }
+
+# ---------------------------------------------
+# launch template
+# ---------------------------------------------
+
+resource "aws_launch_template" "app_lt" {
+  update_default_version = true
+  name                   = "${var.project}-${var.environment}-app-lt"
+
+  image_id = data.aws_ami.app.id
+
+  key_name = aws_key_pair.keypair.key_name
+
+  tag_specifications {
+
+    resource_type = "instance"
+    tags = {
+      Name    = "${var.project}-${var.environment}-app-ec2"
+      project = var.project
+      Env     = var.environment
+      Type    = "app"
+    }
+  }
+
+  network_interfaces {
+    associate_public_ip_address = true
+    security_groups = [
+      aws_security_group.app_sg.id,
+      aws_security_group.opmng_sg.id
+    ]
+    delete_on_termination = true
+  }
+
+  iam_instance_profile {
+    name = aws_iam_instance_profile.app_ec2_profile.name
+  }
+
+  user_data = filebase64("./src/initialize.sh")
+}
