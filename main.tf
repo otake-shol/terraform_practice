@@ -46,6 +46,10 @@ variable "domain" {
   type = string
 }
 
+variable "user_name" {
+  type = string
+}
+
 module "webserver" {
   source        = "./modules/nginx_server"
   instance_type = "t3.micro"
